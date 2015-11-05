@@ -57,30 +57,111 @@ app.initialize();
 var onepass = "";
 
 // Store master password
-function store_master_password()
+function store_onepass()
 {
     onepass = document.getElementById("master_password").value;
 
+    //Prompt if user enters blank input
     if(onepass == "")
     {
         alert("Please enter your 1Pass");
         navigator.notification.alert("Please enter your 1Pass");
         return;
     }
+    if(onepass.length >= 20)
+    {
+        alert("Your password must be 20 characters or less"); 
+        return; 
+    }
 
-    //TODO: Hash password and store in localStorage object
-    $.mobile.changePage($("#pagefour"), "slide", true, true);
+    // Hash given password
+    var onepass_hash = CryptoJS.MD5(onepass);
+
+    // New user who has never logged in before, so we need to add their password
+    if(localStorage.getItem("hashed1pass") === null)
+    {
+        localStorage.setItem('hashed1pass', onepass_hash); 
+        $.mobile.changePage($("#pagetwo"), "slide", true, true); // TODO: create a fifth page for hint management and direct to there
+    }
+    // User has logged in before, so we need to verify their password
+    else {
+        if(localStorage.getItem('hashed1pass') != CryptoJS.MD5(onepass))
+        {
+            alert("The password you have entered is incorrect"); 
+            return; 
+        }
+        display_list(); 
+        $.mobile.changePage($("#pagefour"), "slide", true, true);
+    }
 }
 
-// Helper function for "Show Password List" button. Build list and change to page 4 (account list)
+//Adds a new account and encrypts password
+function new_account() {
+
+    // New account details
+    var name = document.getElementById("new_name").value;
+    var password = document.getElementById("new_password").value;
+
+    // Prompt if user enters blank input
+    if(name == "" || password == "")
+    {
+        navigator.notification.alert("Please enter a site name and password");
+        return;
+    }
+
+    // TODO: Add in if statement to prevent weak passwords
+
+    // Encryption using CryptoJS
+    var options = {
+        mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7
+    };
+    var encrypted_password = CryptoJS.AES.encrypt(password, onepass, options);
+    console.log("1");
+    // Add account name and encrypted password to localStorage object
+    localStorage.setItem(name, encrypted_password)
+    console.log("2");
+    build_list();
+    console.log("3");
+    $.mobile.changePage($("#pagefour"), "slide", true, true);
+    console.log("4");
+}
+
+// Helper function for "Show Password List" button. Build list and navigate to page 4 (account list)
 function display_list()
 {
     build_list();
     $.mobile.changePage($("#pagefour"), "slide", true, true);
 }
 
-// Iterate through localStorage object for 
+// Build account list by iterating through localStorage object
 function build_list()
 {
-    
+    // Create a list object
+    var list = "";
+
+    // 
+    for(var key in localStorage) // TODO: block onepass as a key
+    {
+        list = list + "<li><a href='javascript:decrypt_item(\"" + key + "\"'>" + key + "</a></li>";
+    }
+    //Updates the list of accounts with the new list
+    document.getElementById("ul_list").innerHTML = list;
 }
+
+// Decrypts stored account password from given account key
+function decrypt_item()
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
