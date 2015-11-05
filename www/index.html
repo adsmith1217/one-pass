@@ -81,7 +81,7 @@
             <div data-role="main" class="ui-content">
               <p style="text-align: center">Enter Your 1Pass</p>
               <input type="password" id="master_password" />
-              <a href="javascript:store_master_password()"><button>Submit</button></a> <!-- TODO: master password verification and management -->
+              <a href="javascript:store_onepass()"><button>Submit</button></a> <!-- TODO: master password verification and management -->
             </div>
         </div>
 
@@ -112,7 +112,7 @@
             <div data-role="main" class="ui-content">
               <input type="text" placeholder="Site Name" id="new_name" />
               <input type="text" placeholder="Password (different than your 1Pass)" id="new_password" />
-              <input type="submit" placeholder="Store Password" value="Submit" /> <!-- TODO: Function for adding account -->
+              <a href="javascript:new_account()"><input type="submit" placeholder="Store Password" value="Submit" /></a>
             </div>
         </div>
 
@@ -123,9 +123,15 @@
                 <h1>Accounts</h1>
                 <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a>
             </div>
-            <!-- TODO: Add account list -->
+            <div data-role="main" class="ui-content">
+              <form class="ui-filterable">
+                <input id="myFilter" data-type="search">
+              </form>
+              <ul id="ul_list" data-role="listview" data-filter="true" data-input="#myFilter" data-inset="true">
+              </ul>
             </div>
         </div>
     </body>
 </html>
+
 
