@@ -39,7 +39,7 @@
         </div>
 
         <!-- JS for Cordova -->
-        // <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
 
         <!-- jQuery Mobile, handles mobile front end using HTML5 -->
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
@@ -81,7 +81,7 @@
             <div data-role="main" class="ui-content">
               <p style="text-align: center">Enter Your 1Pass</p>
               <input type="password" id="master_password" />
-              <a href="#pagetwo"><button>Submit</button></a> <!-- TODO: master password verification and management -->
+              <a href="javascript:store_master_password()"><button>Submit</button></a> <!-- TODO: master password verification and management -->
             </div>
         </div>
 
@@ -94,9 +94,10 @@
             </div>
             <!-- Menu Options -->
             <div data-role="main" class="ui-content">
+              <a href="javascript:display_list()"><button>Show Password List</button></a>
               <a href="#pagethree"><button>Add New Password</button></a>
-              <a href="#pagefour"><button>Show Password List</button></a>
               <button>Generate Random Password</button> <!-- TODO: Add js notification -->
+              <button>Change Hint</button> <!-- TODO: Change hint -->
             </div>
         </div>
 
@@ -127,3 +128,4 @@
         </div>
     </body>
 </html>
+
