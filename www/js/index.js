@@ -16,6 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+// Cordova Standard Included Init Functions
 var app = {
     // Application Constructor
     initialize: function() {
@@ -48,4 +50,37 @@ var app = {
     }
 };
 
+// App initialization, custom JS
 app.initialize();
+
+// Create master password
+var onepass = "";
+
+// Store master password
+function store_master_password()
+{
+    onepass = document.getElementById("master_password").value;
+
+    if(onepass == "")
+    {
+        alert("Please enter your 1Pass");
+        navigator.notification.alert("Please enter your 1Pass");
+        return;
+    }
+
+    //TODO: Hash password and store in localStorage object
+    $.mobile.changePage($("#pagefour"), "slide", true, true);
+}
+
+// Helper function for "Show Password List" button. Build list and change to page 4 (account list)
+function display_list()
+{
+    build_list();
+    $.mobile.changePage($("#pagefour"), "slide", true, true);
+}
+
+// Iterate through localStorage object for 
+function build_list()
+{
+    
+}
