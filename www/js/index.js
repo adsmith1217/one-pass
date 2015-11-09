@@ -64,21 +64,12 @@ function store_onepass()
     //Prompt if user enters blank input
     if(onepass == "")
     {
-<<<<<<< HEAD
         navigator.notification.alert("Please enter your 1Pass.");
-=======
-        alert("Please enter your 1Pass");
-        navigator.notification.alert("Please enter your 1Pass");
->>>>>>> 870bee56396f6291807c19579a18c891e93da986
         return;
     }
     if(onepass.length >= 20)
     {
-<<<<<<< HEAD
         alert("Your password must be 20 characters or less."); 
-=======
-        alert("Your password must be 20 characters or less"); 
->>>>>>> 870bee56396f6291807c19579a18c891e93da986
         return; 
     }
 
@@ -95,11 +86,7 @@ function store_onepass()
     else {
         if(localStorage.getItem('hashed1pass') != CryptoJS.MD5(onepass))
         {
-<<<<<<< HEAD
             navigator.notification.alert("The password you have entered is incorrect."); 
-=======
-            alert("The password you have entered is incorrect"); 
->>>>>>> 870bee56396f6291807c19579a18c891e93da986
             return; 
         }
         display_list(); 
@@ -117,16 +104,12 @@ function new_account() {
     // Prompt if user enters blank input
     if(name == "" || password == "")
     {
-<<<<<<< HEAD
         navigator.notification.alert("Please enter a site name and password.");
         return;
     }
     if(CryptoJS.MD5(password) == localStorage.getItem('hashed1pass'))
     {
         navigator.notification.alert("Please use a password besides your 1Pass.");
-=======
-        navigator.notification.alert("Please enter a site name and password");
->>>>>>> 870bee56396f6291807c19579a18c891e93da986
         return;
     }
 
@@ -137,7 +120,6 @@ function new_account() {
         mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7
     };
     var encrypted_password = CryptoJS.AES.encrypt(password, onepass, options);
-<<<<<<< HEAD
     // Add account name and encrypted password to localStorage object
     localStorage.setItem(name, encrypted_password)
     build_list();
@@ -147,16 +129,6 @@ function new_account() {
 // TODO: Add a function to remove a password from the list
 function remove_account() {
 
-=======
-    console.log("1");
-    // Add account name and encrypted password to localStorage object
-    localStorage.setItem(name, encrypted_password)
-    console.log("2");
-    build_list();
-    console.log("3");
-    $.mobile.changePage($("#pagefour"), "slide", true, true);
-    console.log("4");
->>>>>>> 870bee56396f6291807c19579a18c891e93da986
 }
 
 // Helper function for "Show Password List" button. Build list and navigate to page 4 (account list)
@@ -175,18 +147,13 @@ function build_list()
     // 
     for(var key in localStorage) // TODO: block onepass as a key
     {
-<<<<<<< HEAD
         list = list + "<li><a href='javascript:decrypt_item(\"" + key + "\")'>" + key + "</a></li>";
-=======
-        list = list + "<li><a href='javascript:decrypt_item(\"" + key + "\"'>" + key + "</a></li>";
->>>>>>> 870bee56396f6291807c19579a18c891e93da986
     }
     //Updates the list of accounts with the new list
     document.getElementById("ul_list").innerHTML = list;
 }
 
 // Decrypts stored account password from given account key
-<<<<<<< HEAD
 function decrypt_item(name)
 {      
     // Decryption using CryptoJS
@@ -216,22 +183,3 @@ $(document).on("pageshow","#pagefour",function()
 {
   $("#ul_list").listview("refresh");
 });
-
-=======
-function decrypt_item()
-{
-
-}
-
->>>>>>> 870bee56396f6291807c19579a18c891e93da986
-
-
-
-
-
-
-
-
-
-
-
