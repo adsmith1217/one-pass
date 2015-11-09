@@ -9,6 +9,12 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.example.hello"
         }
     },
     "dependent_plugins": {}

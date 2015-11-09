@@ -39,7 +39,7 @@
         </div>
 
         <!-- JS for Cordova -->
-        // <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
 
         <!-- jQuery Mobile, handles mobile front end using HTML5 -->
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
@@ -81,7 +81,7 @@
             <div data-role="main" class="ui-content">
               <p style="text-align: center">Enter Your 1Pass</p>
               <input type="password" id="master_password" />
-              <a href="#pagetwo"><button>Submit</button></a> <!-- TODO: master password verification and management -->
+              <a href="javascript:store_onepass()"><button>Submit</button></a> <!-- TODO: master password verification and management -->
             </div>
         </div>
 
@@ -90,13 +90,14 @@
             <div data-role="header">
               <h1>1Pass</h1>
               <h2>from mjnta</h2>
-              <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a> <!-- TODO: Add logout funciton -->
+              <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a> <!-- TODO: Add logout function -->
             </div>
             <!-- Menu Options -->
             <div data-role="main" class="ui-content">
+              <a href="javascript:display_list()"><button>Show Password List</button></a>
               <a href="#pagethree"><button>Add New Password</button></a>
-              <a href="#pagefour"><button>Show Password List</button></a>
-              <button>Generate Random Password</button> <!-- TODO: Add js notification -->
+              <a href="javascript:generatePassword()"><button>Generate Random Password</button></a>
+              <button>Change Hint</button> <!-- TODO: Change hint -->
             </div>
         </div>
 
@@ -111,7 +112,7 @@
             <div data-role="main" class="ui-content">
               <input type="text" placeholder="Site Name" id="new_name" />
               <input type="text" placeholder="Password (different than your 1Pass)" id="new_password" />
-              <input type="submit" placeholder="Store Password" value="Submit" /> <!-- TODO: Function for adding account -->
+              <a href="javascript:new_account()"><input type="submit" placeholder="Store Password" value="Submit" /></a>
             </div>
         </div>
 
@@ -122,7 +123,12 @@
                 <h1>Accounts</h1>
                 <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a>
             </div>
-            <!-- TODO: Add account list -->
+            <div data-role="main" class="ui-content">
+              <form class="ui-filterable">
+                <input id="myFilter" data-type="search">
+              </form>
+              <ul id="ul_list" data-role="listview" data-filter="true" data-input="#myFilter" data-inset="true">
+              </ul>
             </div>
         </div>
     </body>

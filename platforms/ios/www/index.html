@@ -19,23 +19,17 @@
 -->
 <html>
     <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta charset="utf-8">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
+
+        <!-- Shortcut Tag -->
+        <title>1Pass</title>
     </head>
     <body>
+
+        <!-- Project includes and device initialization -->
         <div class="app">
             <h1>Apache Cordova</h1>
             <div id="deviceready" class="blink">
@@ -43,7 +37,99 @@
                 <p class="event received">Device is Ready</p>
             </div>
         </div>
+
+        <!-- JS for Cordova -->
         <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- jQuery Mobile, handles mobile front end using HTML5 -->
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+        <!-- CryptoJS, AES and MD5 functions -->
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+            <!-- Documentation for use: <script>var encrypted = CryptoJS.AES.encrypt("Message", "Secret Passphrase");
+            var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");</script> -->
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+            <!-- Documentation for use: <script>var hash = CryptoJS.MD5("Message");</script> -->
+
+        <!-- Custom JS and CSS -->
         <script type="text/javascript" src="js/index.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+
+        <!-- Viewport Setup -->
+        <style>
+        @-ms-viewport { width: 100vw ; zoom: 100% ; }
+        @viewport { width: 100vw ; zoom: 100% ; }
+        @-ms-viewport { user-zoom: fixed ; }
+        @viewport { user-zoom: fixed ; }
+        </style>
+
+        <!-- Start of HTML5 Front End
+        Page 1: Login
+        Page 2: Menu
+        Page 3: Add Account
+        Page 4: Account List -->
+
+        <!-- Page 1: Login -->
+        <div data-role="page" id="pageone">
+            <div data-role="header">
+                <h1>1Pass</h1>
+                <h2>from mjnta</h2>
+            </div>
+            <!-- Prompt for user's 1Pass (master password / encryption key) -->
+            <div data-role="main" class="ui-content">
+              <p style="text-align: center">Enter Your 1Pass</p>
+              <input type="password" id="master_password" />
+              <a href="javascript:store_onepass()"><button>Submit</button></a> <!-- TODO: master password verification and management -->
+            </div>
+        </div>
+
+        <!-- Page 2: Menu -->
+        <div data-role="page" id="pagetwo">
+            <div data-role="header">
+              <h1>1Pass</h1>
+              <h2>from mjnta</h2>
+              <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a> <!-- TODO: Add logout function -->
+            </div>
+            <!-- Menu Options -->
+            <div data-role="main" class="ui-content">
+              <a href="javascript:display_list()"><button>Show Password List</button></a>
+              <a href="#pagethree"><button>Add New Password</button></a>
+              <a href="javascript:generatePassword()"><button>Generate Random Password</button></a>
+              <button>Change Hint</button> <!-- TODO: Change hint -->
+            </div>
+        </div>
+
+        <!-- Page 3: Add Account -->
+        <div data-role="page" id="pagethree">
+            <div data-role="header">
+              <a href="#pagetwo" class="ui-btn ui-icon-home ui-btn-icon-left">Menu</a>
+              <h1>Add</h1>
+              <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a>
+            </div>
+
+            <div data-role="main" class="ui-content">
+              <input type="text" placeholder="Site Name" id="new_name" />
+              <input type="text" placeholder="Password (different than your 1Pass)" id="new_password" />
+              <a href="javascript:new_account()"><input type="submit" placeholder="Store Password" value="Submit" /></a>
+            </div>
+        </div>
+
+        <!-- Page 4: Account List -->
+        <div data-role="page" id="pagefour">
+            <div data-role="header">
+                <a href="#pagetwo" class="ui-btn ui-icon-home ui-btn-icon-left">Menu</a>
+                <h1>Accounts</h1>
+                <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a>
+            </div>
+            <div data-role="main" class="ui-content">
+              <form class="ui-filterable">
+                <input id="myFilter" data-type="search">
+              </form>
+              <ul id="ul_list" data-role="listview" data-filter="true" data-input="#myFilter" data-inset="true">
+              </ul>
+            </div>
+        </div>
     </body>
 </html>
