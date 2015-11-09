@@ -144,7 +144,6 @@ function build_list()
     // Create a list object
     var list = "";
 
-    // 
     for(var key in localStorage)
     {
         if(key == "hashed1pass")
@@ -172,14 +171,20 @@ function decrypt_item(name)
     navigator.notification.alert("Password is: " + decrypted_password.toString(CryptoJS.enc.Utf8));
 }
 
-//Random Password Generator
+// Random Password Generator
 function generatePassword() {
+    
+    // Sets up the character set to be used for random generation
     var length = 8;
         charset = "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
         retVal = "";
+
+    // Creates a random string of 8 characters from set above
     for (var i = 0, n = charset.length; i < length; ++i) {
         retVal += charset.charAt(Math.floor(Math.random() * n));
     }
+
+    // Delivers random string to user as a notification
     navigator.notification.alert("Your random password is: " + retVal)
 }
 
