@@ -145,9 +145,16 @@ function build_list()
     var list = "";
 
     // 
-    for(var key in localStorage) // TODO: block onepass as a key
+    for(var key in localStorage)
     {
-        list = list + "<li><a href='javascript:decrypt_item(\"" + key + "\")'>" + key + "</a></li>";
+        if(key == "hashed1pass")
+        {
+            list = list;
+        }
+        else
+        {
+            list = list + "<li><a href='javascript:decrypt_item(\"" + key + "\")'>" + key + "</a></li>";
+        }
     }
     //Updates the list of accounts with the new list
     document.getElementById("ul_list").innerHTML = list;
