@@ -69,7 +69,8 @@
         Page 1: Login
         Page 2: Menu
         Page 3: Add Account
-        Page 4: Account List -->
+        Page 4: Account List
+        Page 5: Change Hint -->
 
         <!-- Page 1: Login -->
         <div data-role="page" id="pageone">
@@ -77,11 +78,13 @@
                 <h1>1Pass</h1>
                 <h2>from mjnta</h2>
             </div>
+
             <!-- Prompt for user's 1Pass (master password / encryption key) -->
-            <div data-role="main" class="ui-content">
+            <div data-role="main" class="ui-content" id="id1">
               <p style="text-align: center">Enter Your 1Pass</p>
               <input type="password" id="master_password" />
-              <a href="javascript:store_onepass()"><button>Submit</button></a> <!-- TODO: master password verification and management -->
+              <p style="text-align: left" id="id-text"><script>get_hint();</script></p>
+              <a href="javascript:store_onepass()"><button>Login</button></a>
             </div>
         </div>
 
@@ -92,12 +95,13 @@
               <h2>from mjnta</h2>
               <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a> <!-- TODO: Add logout function -->
             </div>
+
             <!-- Menu Options -->
             <div data-role="main" class="ui-content">
               <a href="javascript:display_list()"><button>Show Password List</button></a>
               <a href="#pagethree"><button>Add New Password</button></a>
               <a href="javascript:generatePassword()"><button>Generate Random Password</button></a>
-              <button>Change Hint</button> <!-- TODO: Change hint -->
+              <a href="#pagefive"><button>Change Hint</button></a>
             </div>
         </div>
 
@@ -109,6 +113,7 @@
               <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a>
             </div>
 
+            <!-- Fields for new account details -->
             <div data-role="main" class="ui-content">
               <input type="text" placeholder="Site Name" id="new_name" />
               <input type="text" placeholder="Password (different than your 1Pass)" id="new_password" />
@@ -123,12 +128,28 @@
                 <h1>Accounts</h1>
                 <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a>
             </div>
+
+            <!-- Build list of accounts -->
             <div data-role="main" class="ui-content">
               <form class="ui-filterable">
                 <input id="myFilter" data-type="search">
               </form>
               <ul id="ul_list" data-role="listview" data-filter="true" data-input="#myFilter" data-inset="true">
               </ul>
+            </div>
+        </div>
+
+        <!-- Page 5: Change Hint -->
+        <div data-role="page" id="pagefive">
+            <div data-role="header">
+              <a href="#pagetwo" class="ui-btn ui-icon-home ui-btn-icon-left">Menu</a>
+              <h1>Change Hint</h1>
+            </div>
+
+            <!-- Field for changing hint -->
+            <div data-role="main" class="ui-content">
+              <input type="text" placeholder="Add your new hint here" id="new_hint" />
+              <a href="javascript:change_hint()"><input type="submit" placeholder="Save Hint" value="Save" /></a>
             </div>
         </div>
     </body>
