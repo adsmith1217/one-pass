@@ -55,6 +55,7 @@ app.initialize();
 
 // Create master password
 var onepass = "";
+localStorage.setItem('hint', "IMPORTANT: Once this password is set it cannot be changed.");
 
 // Store master password
 function store_onepass()
@@ -80,7 +81,7 @@ function store_onepass()
     if(localStorage.getItem("hashed1pass") === null)
     {
         localStorage.setItem('hashed1pass', onepass_hash); 
-        $.mobile.changePage($("#pagetwo"), "slide", true, true); // TODO: create a fifth page for hint management and direct to there
+        $.mobile.changePage($("#pagefive"), "slide", true, true);
     }
     // User has logged in before, so we need to verify their password
     else {
@@ -146,7 +147,7 @@ function build_list()
 
     for(var key in localStorage)
     {
-        if(key == "hashed1pass")
+        if(key == "hashed1pass" || key == "hint")
         {
             list = list;
         }
@@ -188,7 +189,29 @@ function generatePassword() {
     navigator.notification.alert("Your random password is: " + retVal)
 }
 
-// TODO: Function for changing the hint
+// Function for changing the hint
+function change_hint() {
+
+    localStorage.removeItem('hint');
+    var new_hint = document.getElementById("new_hint").value;
+    localStorage.setItem('hint', new_hint);
+    // refresh();
+    $.mobile.changePage($("#pagefour"), "slide", true, true);
+}
+
+// Function for retrieving the stored hint from localStorage object
+function get_hint() {
+    document.write(localStorage.getItem('hint'));
+}
+
+function refresh()
+{
+    jQuery.mobile.changePage(window.location.href, {
+        allowSamePageTransition: true,
+        transition: 'none',
+        reloadPage: true
+    });
+}
 
 // Refreshes to list of accounts everytime page is visited
 $(document).on("pageshow","#pagefour",function()
