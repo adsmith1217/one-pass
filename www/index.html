@@ -75,8 +75,7 @@
         <!-- Page 1: Login -->
         <div data-role="page" id="pageone">
             <div id="login-header" data-role="header">
-                <h1 id="one-pass-logo" >1Pass</h1>
-                <h2 id="mjnta-name">from mjnta</h2>
+                <h1 id="one-pass-logo" >1pass</h1>
             </div>
 
             <!-- Prompt for user's 1Pass (master password / encryption key) -->
@@ -91,8 +90,7 @@
         <!-- Page 2: Menu -->
         <div data-role="page" id="pagetwo">
             <div id="menu-header" data-role="header">
-              <h1 id="one-pass-logo">MENU</h1>
-              <h2 id="mjnta-name">1PASS</h2>
+              <h1 id="one-pass-logo">1pass</h1>
               <a href="javascript:logout()" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a> <!-- TODO: Add logout function -->
             </div>
 
@@ -116,8 +114,9 @@
             <!-- Fields for new account details -->
             <div data-role="main" class="ui-content">
               <input type="text" placeholder="Site Name" id="new_name" />
-              <input type="text" placeholder="Password (different than your 1Pass)" id="new_password" />
+              <input type="text" placeholder="Password (different than your 1pass)" id="new_password" />
               <a href="javascript:new_account()"><input class="menu-option-btn" type="submit" placeholder="Store Password" value="Submit" /></a>
+              <a href="javascript:another_new_account()"><input class="menu-option-btn" type="submit" placeholder="Store Password" value="Add Another Account" /></a>
             </div>
         </div>
 
