@@ -62,16 +62,57 @@ function store_onepass()
 {
     onepass = document.getElementById("master_password").value;
 
-    //Prompt if user enters blank input
+    // Prompt if user enters blank input
     if(onepass == "")
     {
         navigator.notification.alert("Please enter your 1Pass.");
         return;
     }
+
+    // Password maximum
     if(onepass.length >= 20)
     {
-        alert("Your password must be 20 characters or less."); 
+        navigator.notification.alert("Your password must be 20 characters or less."); 
         return; 
+    }
+
+    // Password minimum
+    if(onepass.length < 8)
+    {
+        navigator.notification.alert("Your password must be more than 8 characters");
+        return;
+    }
+
+    // Password includes numbers
+    re = /[0-9]/;
+    if(!re.test(onepass))
+    {
+        navigator.notification.alert("Your password must contain numbers");
+        return;
+    }
+
+    // Password includes lowercase letters
+    re = /[a-z]/;
+    if(!re.test(onepass))
+    {
+        navigator.notification.alert("Your password must contain at least one lowercase letter");
+        return;
+    }
+
+    // Password includes uppercase letters
+    re = /[A-Z]/;
+    if(!re.test(onepass))
+    {
+        navigator.notification.alert("Your password must contain at least one uppercase letter");
+        return;
+    }
+
+    // Password includes special characters
+    re = /[!@#$%^&*]/;
+    if(!re.test(onepass))
+    {
+        navigator.notification.alert("Your password must contain at least one special character")
+        return;
     }
 
     // Hash given password
@@ -95,7 +136,7 @@ function store_onepass()
     }
 }
 
-//Adds a new account and encrypts password
+// Adds a new account and encrypts password
 function new_account() {
 
     // New account details
