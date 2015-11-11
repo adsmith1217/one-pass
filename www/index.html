@@ -74,25 +74,25 @@
 
         <!-- Page 1: Login -->
         <div data-role="page" id="pageone">
-            <div data-role="header">
-                <h1>1Pass</h1>
-                <h2>from mjnta</h2>
+            <div id="login-header" data-role="header">
+                <h1 id="one-pass-logo" >1Pass</h1>
+                <h2 id="mjnta-name">from mjnta</h2>
             </div>
 
             <!-- Prompt for user's 1Pass (master password / encryption key) -->
             <div data-role="main" class="ui-content" id="id1">
-              <p style="text-align: center">Enter Your 1Pass</p>
+              <p id="enter-1pass">Enter Your 1Pass</p>
               <input type="password" id="master_password" />
-              <p style="text-align: left" id="id-text"><script>get_hint();</script></p>
-              <a href="javascript:store_onepass()"><button>Login</button></a>
+              <p class="hint" id="id-text"><script>get_hint();</script></p>
+              <a href="javascript:store_onepass()"><button id="login-btn">Login</button></a>
             </div>
         </div>
 
         <!-- Page 2: Menu -->
         <div data-role="page" id="pagetwo">
-            <div data-role="header">
-              <h1>1Pass</h1>
-              <h2>from mjnta</h2>
+            <div id="menu-header" data-role="header">
+              <h1 id="one-pass-logo">MENU</h1>
+              <h2 id="mjnta-name">1PASS</h2>
               <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a> <!-- TODO: Add logout function -->
             </div>
 
@@ -107,9 +107,9 @@
 
         <!-- Page 3: Add Account -->
         <div data-role="page" id="pagethree">
-            <div data-role="header">
+            <div id="menu-option-header" data-role="header">
               <a href="#pagetwo" class="ui-btn ui-icon-home ui-btn-icon-left">Menu</a>
-              <h1>Add</h1>
+              <h1 id="menu-option-heading">Add New Password</h1>
               <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a>
             </div>
 
@@ -117,15 +117,15 @@
             <div data-role="main" class="ui-content">
               <input type="text" placeholder="Site Name" id="new_name" />
               <input type="text" placeholder="Password (different than your 1Pass)" id="new_password" />
-              <a href="javascript:new_account()"><input type="submit" placeholder="Store Password" value="Submit" /></a>
+              <a href="javascript:new_account()"><input class="menu-option-btn" type="submit" placeholder="Store Password" value="Submit" /></a>
             </div>
         </div>
 
         <!-- Page 4: Account List -->
         <div data-role="page" id="pagefour">
-            <div data-role="header">
+            <div id="menu-option-header" data-role="header">
                 <a href="#pagetwo" class="ui-btn ui-icon-home ui-btn-icon-left">Menu</a>
-                <h1>Accounts</h1>
+                <h1 id="menu-option-heading">Password List</h1>
                 <a href="#pageone" class="ui-btn ui-btn-right ui-icon-action ui-btn-icon-right">Logout</a>
             </div>
 
@@ -141,15 +141,15 @@
 
         <!-- Page 5: Change Hint -->
         <div data-role="page" id="pagefive">
-            <div data-role="header">
+            <div id="menu-option-header" data-role="header">
               <a href="#pagetwo" class="ui-btn ui-icon-home ui-btn-icon-left">Menu</a>
-              <h1>Change Hint</h1>
+              <h1 id="menu-option-heading">Change Hint</h1>
             </div>
 
             <!-- Field for changing hint -->
             <div data-role="main" class="ui-content">
               <input type="text" placeholder="Add your new hint here" id="new_hint" />
-              <a href="javascript:change_hint()"><input type="submit" placeholder="Save Hint" value="Save" /></a>
+              <a href="javascript:change_hint()"><input class="menu-option-btn" type="submit" placeholder="Save Hint" value="Save" /></a>
             </div>
         </div>
     </body>
