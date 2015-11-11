@@ -121,12 +121,58 @@ a {
     text-decoration: none;
 }
 
+#login-header {
+    background-color: black;
+}
 
+#one-pass-logo {
+    color: white;
+    font-size: 30px;
+    font-family: sans-serif;
+}
 
+#mjnta-name {
+    color: white;
+    font-family: sans-serif;
+    font-weight: 100;
+}
 
+#login-btn {
+    background-color:#006699; 
+    color: white;
+    font-weight: 100;
+}
 
+#enter-1pass {
+    font-size: medium;
+    font-weight: 700;
+    text-align: center;
+}
 
+p.hint {
+    text-align: center;
+    color: #990000;
+}
 
+#menu-header {
+    background-color: #006699;
+}
 
+#menu-option-header {
+    background-color: black;
+}
 
+#menu-option-heading {
+    color: white;
+    font-size: medium;
+    font-family: sans-serif;
+}
 
+input.menu-option-btn {
+    background-color: #006699;
+    color: white;
+    font-weight: 100;
+    opacity: 1;
+    text-indent: 0;
+    font-size: larger;
+}
