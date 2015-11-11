@@ -55,7 +55,12 @@ app.initialize();
 
 // Create master password
 var onepass = "";
-localStorage.setItem('hint', "IMPORTANT: Once this password is set it cannot be changed.");
+
+// Helper text is user has not created an account yet
+if(localStorage.getItem("hashed1pass") === null)
+{
+    localStorage.setItem('hint', "IMPORTANT: Once this password is set it cannot be changed.");
+}
 
 // Store master password
 function store_onepass()
@@ -155,8 +160,6 @@ function new_account() {
         return;
     }
 
-    // TODO: Add in if statement to prevent weak passwords
-
     // Encryption using CryptoJS
     var options = {
         mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7
@@ -237,7 +240,7 @@ function change_hint() {
     var new_hint = document.getElementById("new_hint").value;
     localStorage.setItem('hint', new_hint);
     // refresh();
-    $.mobile.changePage($("#pagefour"), "slide", true, true);
+    $.mobile.changePage($("#pagetwo"), "slide", true, true);
 }
 
 // Function for retrieving the stored hint from localStorage object
@@ -245,13 +248,18 @@ function get_hint() {
     document.write(localStorage.getItem('hint'));
 }
 
-function refresh()
-{
+function refresh() {
     jQuery.mobile.changePage(window.location.href, {
         allowSamePageTransition: true,
         transition: 'none',
         reloadPage: true
     });
+}
+
+// Logout
+function logout() {
+    location.reload(true);
+    $.mobile.changePage($("#pageone"), "slide", true, true);
 }
 
 // Refreshes to list of accounts everytime page is visited
