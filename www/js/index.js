@@ -156,7 +156,7 @@ function new_account() {
     }
     if(CryptoJS.MD5(password) == localStorage.getItem('hashed1pass'))
     {
-        navigator.notification.alert("Please use a password besides your 1Pass.");
+        navigator.notification.alert("Please use a password besides your 1pass.");
         return;
     }
 
@@ -171,9 +171,41 @@ function new_account() {
     $.mobile.changePage($("#pagefour"), "slide", true, true);
 }
 
-// TODO: Add a function to remove a password from the list
-function remove_account() {
+// Removes account from localStorage object and rebuilds list
+function remove_account(name) {
+    localStorage.removeItem(name);
+    $.mobile.changePage($("#pagetwo"), "slide", true, true);
+    display_list();
+}
 
+// Used for bulk password entry by keeping user on page three
+function another_new_account() {
+    var name = document.getElementById("new_name").value;
+    var password = document.getElementById("new_password").value;
+
+    // Prompt if user enters blank input
+    if(name == "" || password == "")
+    {
+        navigator.notification.alert("Please enter a site name and password.");
+        return;
+    }
+    if(CryptoJS.MD5(password) == localStorage.getItem('hashed1pass'))
+    {
+        navigator.notification.alert("Please use a password besides your 1pass.");
+        return;
+    }
+
+    // Encryption using CryptoJS
+    var options = {
+        mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7
+    };
+    var encrypted_password = CryptoJS.AES.encrypt(password, onepass, options);
+    // Add account name and encrypted password to localStorage object
+    localStorage.setItem(name, encrypted_password)
+    build_list();
+
+    // Alert user that password was added successfully
+    navigator.notification.alert("Saved successfully!");
 }
 
 // Helper function for "Show Password List" button. Build list and navigate to page 4 (account list)
@@ -187,7 +219,7 @@ function display_list()
 function build_list()
 {
     // Create a list object
-    var list = "";
+    var list = "<li data-role='divider' class='ui-li-static ui-body-inherit ui-first-child'>Select account to view password</li>";
 
     for(var key in localStorage)
     {
@@ -197,10 +229,10 @@ function build_list()
         }
         else
         {
-            list = list + "<li><a href='javascript:decrypt_item(\"" + key + "\")'>" + key + "</a></li>";
+            list = list + "<li class='ui-btn'><a href='javascript:decrypt_item(\"" + key + "\")'>" + key + "</a><a href='javascript:remove_account(\"" + key + "\")' data-icon='delete'>Delete</a></li>";
         }
     }
-    //Updates the list of accounts with the new list
+    // Updates the list of accounts with the new list
     document.getElementById("ul_list").innerHTML = list;
 }
 
@@ -239,7 +271,6 @@ function change_hint() {
     localStorage.removeItem('hint');
     var new_hint = document.getElementById("new_hint").value;
     localStorage.setItem('hint', new_hint);
-    // refresh();
     $.mobile.changePage($("#pagetwo"), "slide", true, true);
 }
 
@@ -248,15 +279,7 @@ function get_hint() {
     document.write(localStorage.getItem('hint'));
 }
 
-function refresh() {
-    jQuery.mobile.changePage(window.location.href, {
-        allowSamePageTransition: true,
-        transition: 'none',
-        reloadPage: true
-    });
-}
-
-// Logout
+// Logout function clears cache and navigates to login page
 function logout() {
     location.reload(true);
     $.mobile.changePage($("#pageone"), "slide", true, true);
