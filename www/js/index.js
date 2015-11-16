@@ -121,7 +121,7 @@ function store_onepass()
     }
 
     // Hash given password
-    var onepass_hash = CryptoJS.MD5(onepass);
+    var onepass_hash = CryptoJS.SHA3(onepass);
 
     // New user who has never logged in before, so we need to add their password
     if(localStorage.getItem("hashed1pass") === null)
@@ -131,7 +131,7 @@ function store_onepass()
     }
     // User has logged in before, so we need to verify their password
     else {
-        if(localStorage.getItem('hashed1pass') != CryptoJS.MD5(onepass))
+        if(localStorage.getItem('hashed1pass') != CryptoJS.SHA3(onepass))
         {
             navigator.notification.alert("The password you have entered is incorrect."); 
             return; 
@@ -154,7 +154,7 @@ function new_account() {
         navigator.notification.alert("Please enter a site name and password.");
         return;
     }
-    if(CryptoJS.MD5(password) == localStorage.getItem('hashed1pass'))
+    if(CryptoJS.SHA3(password) == localStorage.getItem('hashed1pass'))
     {
         navigator.notification.alert("Please use a password besides your 1pass.");
         return;
@@ -189,7 +189,7 @@ function another_new_account() {
         navigator.notification.alert("Please enter a site name and password.");
         return;
     }
-    if(CryptoJS.MD5(password) == localStorage.getItem('hashed1pass'))
+    if(CryptoJS.SHA3(password) == localStorage.getItem('hashed1pass'))
     {
         navigator.notification.alert("Please use a password besides your 1pass.");
         return;
@@ -234,6 +234,7 @@ function build_list()
     }
     // Updates the list of accounts with the new list
     document.getElementById("ul_list").innerHTML = list;
+
 }
 
 // Decrypts stored account password from given account key
