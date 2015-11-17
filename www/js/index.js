@@ -1,4 +1,7 @@
 /*
+ * 1pass - Developed with love by Adam Smith, Noam Rose,
+ * Taylor Brandstatter, Jimmy McDonnel, and Michael Hineman
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -138,6 +141,28 @@ function store_onepass()
         }
         display_list(); 
         $.mobile.changePage($("#pagefour"), "slide", true, true);
+    }
+}
+
+// Passive timeout function logs user out after one minute of inactivity
+var idleTime = 0;
+$(document).ready(function () {
+    // Increment the idle time counter every minute.
+    var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+    // Zero the idle timer on mouse movement.
+    $(this).mousemove(function (e) {
+        idleTime = 0;
+    });
+    $(this).keypress(function (e) {
+        idleTime = 0;
+    });
+});
+
+function timerIncrement() {
+    idleTime = idleTime + 1;
+    if (idleTime > 1) { // 1 minutes
+        logout(); 
     }
 }
 
