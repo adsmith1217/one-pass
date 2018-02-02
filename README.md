@@ -1,2 +1,2 @@
 # one-pass
-Cyber Security password storage app
+Cyber Security password storage hybrid app
